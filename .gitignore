@@ -64,6 +64,12 @@ octave-workspace
 # Command line history
 .octave_hist
 
-### Dockerfile ###
-# _data directory
-_data/
+# Octave directories
+octave/*
+
+# Octave packages
+.octave_packages
+
+### octave-docker ###
+_data/*
+!_data/.gitkeep
