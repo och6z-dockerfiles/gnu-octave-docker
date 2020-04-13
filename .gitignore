@@ -75,6 +75,7 @@ octave/*
 __pycache__/
 *.py[cod]
 *$py.class
+.python_history
 
 # C extensions
 *.so
