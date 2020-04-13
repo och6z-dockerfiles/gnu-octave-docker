@@ -1,6 +1,6 @@
-docker build --no-cache --build-arg DEBIAN_VERSION=stable-slim --build-arg GID=$(id -g) --build-arg GID_NAME=$(id -gn) --build-arg UID=$(id -u) --build-arg UID_NAME=$(id -un) --file Dockerfile . --tag image-name:latest
+docker build --no-cache --build-arg PYTHON_VERSION=slim --build-arg GID=$(id -g) --build-arg GID_NAME=$(id -gn) --build-arg UID=$(id -u) --build-arg UID_NAME=$(id -un) --file Dockerfile . --tag image-name:latest
 
-docker run -it --user $(id -un) --volume $(pwd):/home/$(id -un) --name container-name image-id /bin/bash
+docker run -it --user $(id -un) --volume $(pwd):/home/$(id -un) --name container-name image-id
 
 docker container start container-id
 
