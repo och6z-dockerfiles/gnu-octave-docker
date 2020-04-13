@@ -179,3 +179,4 @@ dmypy.json
 ### octave-docker ###
 _data/*
 !_data/.gitkeep
+!_data/requirements.txt
