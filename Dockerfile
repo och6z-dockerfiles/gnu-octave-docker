@@ -21,14 +21,14 @@ ARG UID_NAME
 RUN addgroup --gid ${GID} ${GID_NAME} \
     && adduser --uid ${UID} --ingroup ${GID_NAME} --home /home/${UID_NAME} --shell /bin/bash --disabled-password --gecos "" ${UID_NAME}
 
-COPY --chown=${UID_NAME}:${GID_NAME} _data /home/${UID_NAME}/
+COPY --chown=${UID_NAME}:${GID_NAME} data /home/${UID_NAME}/
 
 RUN apt-get update \
     && pip install --upgrade --requirement /home/${UID_NAME}/requirements.txt \
     && apt-get purge -y && apt-get autoremove -y && apt-get autoclean -y \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/${UID_NAME}/_data
+WORKDIR /home/${UID_NAME}/data
 
 ENTRYPOINT ["/bin/bash", "-c"]
 
