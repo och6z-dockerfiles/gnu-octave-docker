@@ -1,13 +1,33 @@
-* GNU Octave
+* GNU Octave docker
 #+BEGIN_SRC sh
-$ docker build --no-cache --build-arg PYTHON_VERSION=slim --build-arg GID=$(id -g) --build-arg GID_NAME=$(id -gn) --build-arg UID=$(id -u) --build-arg UID_NAME=$(id -un) --file Dockerfile . --tag image-name:latest
+$ docker build --no-cache \
+    --build-arg PYTHON_VERSION=slim \
+    --build-arg GID=$(id -g) \
+    --build-arg GID_NAME=$(id -gn) \
+    --build-arg UID=$(id -u) \
+    --build-arg UID_NAME=$(id -un) \
+    --file Dockerfile . \
+    --tag image-name:latest
 #+END_SRC
 #+BEGIN_SRC sh
-$ docker run -it --user $(id -un) --volume $(pwd):/home/$(id -un) --name container-name image-id
+xhost +local:docker
+#+END_SRC
+#+BEGIN_SRC sh
+$ docker container run \
+    --interactive \
+    --tty \
+    --user $(id -un) --volume $(pwd):/home/$(id -un) \
+    --volume /tmp/.X11-unix:/tmp/.X11-unix \
+    --env DISPLAY=unix$DISPLAY \
+    --name container-name image-id
 #+END_SRC
 #+BEGIN_SRC sh
 $ docker container start container-id
 #+END_SRC
 #+BEGIN_SRC sh
-$ docker exec --user root -it container-id /bin/bash
+$ docker container exec \
+    --interactive \
+    --tty \
+    --user root \
+    container-id /bin/bash
 #+END_SRC
